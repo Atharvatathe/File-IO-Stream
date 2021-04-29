@@ -1,31 +1,36 @@
+import jdk.dynalink.linker.LinkerServices;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class EmployeePayrollService {
-    public int id;
-    public String name;
-    public double salary;
+    private List<EmployeePayrollData> employeePayrollList;
 
-    public void setEmployeeData()
-    {
-        Scanner employee = new Scanner(System.in);
-        System.out.println("Enter the Name of Employee");
-        this.name = employee.nextLine();
-        System.out.println("Enter the ID of Employee");
-        this.id = employee.nextInt();
-        System.out.println("Enter the salary of Employee");
-        this.salary = employee.nextDouble();
-    }
-
-    public void getEmployeeData(){
-        System.out.println("Employee Name: " +name);
-        System.out.println("Employee ID: " +id);
-        System.out.println("Employee Salary: " +salary);
+    public EmployeePayrollService(List<EmployeePayrollData>employeePayrollList){
+        this.employeePayrollList = employeePayrollList;
     }
 
     public static void main(String[] args){
-        EmployeePayrollService employeePayrollService = new EmployeePayrollService();
-        employeePayrollService.setEmployeeData();
-        employeePayrollService.getEmployeeData();
+        ArrayList<EmployeePayrollData> employeePayrollList = new ArrayList<>();
+        EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
+        Scanner consoleInputReader = new Scanner(System.in);
+        employeePayrollService.readEmployeePayRollData(consoleInputReader);
+        employeePayrollService.writeEmployeePayRollData();
+    }
+
+    private void readEmployeePayRollData(Scanner consoleInputReadr){
+    System.out.println("Enter Employee Id");
+    int id = consoleInputReadr.nextInt();
+    System.out.println("Enter Employee Name");
+    String name =consoleInputReadr.next();
+    System.out.println("Enter Employee Salary");
+    double salary = consoleInputReadr.nextDouble();
+
+    }
+
+    private void writeEmployeePayRollData(){
+    System.out.println(employeePayrollList);
     }
 }
 
